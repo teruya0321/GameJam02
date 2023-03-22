@@ -7,10 +7,23 @@ public class BulletScript : MonoBehaviour
     public float minangle;
     public float maxangle;
 
+    PlayerControl_Nat playerControl_Nat;
+
+    private void Start()
+    {
+        //GameObject  = GameObject.Find("Player"); //Playerっていうオブジェクトを探す
+        playerControl_Nat = GetComponent<PlayerControl_Nat>(); //付いているスクリプトを取得
+    }
+
     public void Shot(Vector3 dir)
     {
-        GetComponent<Rigidbody>().AddForce(dir);
+        //忘れん内にここに刻む　これはlimitに合わせて弾のばらけを設定しようとしている
+        //if (limit == 0)
 
+
+
+
+        GetComponent<Rigidbody>().AddForce(dir);
         Vector3 vel = new Vector3(Random.Range(minangle, maxangle), Random.Range(minangle, maxangle), Random.Range(minangle, maxangle));
         GetComponent<Rigidbody>().velocity = vel;
 

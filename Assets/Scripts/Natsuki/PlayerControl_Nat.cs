@@ -18,14 +18,28 @@ public class PlayerControl_Nat : MonoBehaviour
 
     public GameObject Player;
 
+    public float limit;
+    public int maxlimit;
+    public int minlimit;
+
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
         roteuler = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0f);//視点移動の奴です
+
+        limit = 50;
     }
     void Update()
     {
+
+        limit += 10 * Time.deltaTime;
+
+        limit = System.Math.Min(limit, maxlimit);
+        limit = System.Math.Max(limit, minlimit);
+
         var velocity = Vector3.zero;//プレイヤーの移動　見にくいもので申し訳ないです。
         if (Input.GetKey(KeyCode.W))
         {
@@ -50,6 +64,7 @@ public class PlayerControl_Nat : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))//左クリックでRay発射
         {
+            limit -= 5;
             Ray ray = new Ray(Player.transform.position, Player.transform.forward);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
@@ -57,7 +72,8 @@ public class PlayerControl_Nat : MonoBehaviour
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
                 bullet = Instantiate(bulletPrefab, Barrel.transform.position, Quaternion.identity);
                 Vector3 worldDir = ray.direction;
-                bullet.GetComponent<BulletScript>().Shot(worldDir * ballspeed);       
+                bullet.GetComponent<BulletScript>().Shot(worldDir * ballspeed);
+                Destroy(bullet, 1f);
             }
             else
             {
@@ -65,6 +81,7 @@ public class PlayerControl_Nat : MonoBehaviour
                 bullet = Instantiate(bulletPrefab, Barrel.transform.position, Quaternion.identity);
                 Vector3 worldDir = ray.direction;
                 bullet.GetComponent<BulletScript>().Shot(worldDir * ballspeed);
+                Destroy(bullet, 1f);
             }
         }
 
