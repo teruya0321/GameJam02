@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyData_nos
+public class EnemyModel_nos : MonoBehaviour
 {
     public int enemyID;
     public string enemyName;
-    public int atk;
-    public int hp;
-    public void DataDisplay()
-    {
-        
-    }
+    public int enemyAtk;
+    public int enemyHp;
 }
