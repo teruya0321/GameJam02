@@ -11,14 +11,12 @@ public class BulletScript : MonoBehaviour
 
     private void Start()
     {
-        //GameObject  = GameObject.Find("Player"); //Playerっていうオブジェクトを探す
         playerControl_Nat = GetComponent<PlayerControl_Nat>(); //付いているスクリプトを取得
     }
 
     public void Shot(Vector3 dir)
     {
-        //忘れん内にここに刻む　これはlimitに合わせて弾のばらけを設定しようとしている
-        //if (limit == 0)
+       // if (limit == 0)
 
 
 
